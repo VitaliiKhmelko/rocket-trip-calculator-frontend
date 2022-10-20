@@ -7,7 +7,7 @@ import { of } from 'rxjs';
   styleUrls: ['./expenses-table.component.scss']
 })
 export class ExpensesTableComponent implements OnInit {
-  readonly displayedColumns = ['name', 'expenses', 'bar', 'actions']
+  readonly displayedColumns = ['name', 'expenses', 'actions']
 
   data$ = of([{
     name: 'Adriana',
@@ -16,6 +16,10 @@ export class ExpensesTableComponent implements OnInit {
         cost: 2.56,
         type: 'hotel',
         description: '3 star hotel in NYC'
+      }, {
+        cost: 40.53,
+        type: 'food',
+        description: 'Pizza Manhattan'
       }
     ] 
   }])
