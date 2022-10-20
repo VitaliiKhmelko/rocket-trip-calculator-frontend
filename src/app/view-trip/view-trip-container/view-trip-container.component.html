@@ -1,5 +1,5 @@
-<app-expenses-table [attenders]="trip.attenders" (addExpensesAction)="addExpenses()"
-  (showDetailsAction)="showDetails()"></app-expenses-table>
+<app-expenses-table [attenders]="trip.attenders" (addExpensesAction)="addExpenses($event)"
+  (showDetailsAction)="showDetails($event)"></app-expenses-table>
 
 <div class="page-actions">
   <button mat-raised-button color="warn">

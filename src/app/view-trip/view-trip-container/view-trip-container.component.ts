@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ExpensesType } from 'src/app/models/expenses.type';
 import { Trip } from 'src/app/models/trip';
+import { viewTripComponentAddExpensesClicked, viewTripComponentFinishTripClicked, viewTripComponentInitialized, viewTripComponentShowDetailsClicked } from 'src/app/redux/actions/view-trip-component.actions';
 
 @Component({
   selector: 'app-view-trip-container',
@@ -42,17 +44,22 @@ export class ViewTripContainerComponent implements OnInit {
       }]
   }
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(viewTripComponentInitialized());
   }
 
-  addExpenses(): void {
-
+  addExpenses(name: string): void {
+    this.store.dispatch(viewTripComponentAddExpensesClicked({ name }));
   }
 
-  showDetails(): void {
+  showDetails(name: string): void {
+    this.store.dispatch(viewTripComponentShowDetailsClicked({ name }))
+  }
 
+  finishTrip(uuid: string) {
+    this.store.dispatch(viewTripComponentFinishTripClicked({ uuid }))
   }
 
 }
