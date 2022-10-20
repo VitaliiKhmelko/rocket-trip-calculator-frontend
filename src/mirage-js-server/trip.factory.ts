@@ -5,11 +5,11 @@ import { Expenses } from 'src/app/models/expenses';
 /**
  * Factory to create a mock trip entity
  */
-export const tripFactory = (user: string) => {
+export const tripFactory = (user: string, tripUuid: string) => {
   return {
     name: `Trip to ${address.cityName()}`,
     isFinished: false,
-    uuid: datatype.uuid(),
+    uuid: tripUuid,
     attenders: (() => {
 
       const attenders: Attender[] = [{

@@ -1,4 +1,5 @@
-import { Response, Server } from 'miragejs';
+import { HttpResponse } from '@angular/common/http';
+import { Server } from 'miragejs';
 import { tripFactory } from './trip.factory';
 
 /**
@@ -13,10 +14,11 @@ export function registerLoginRoutes(
 ): void {
   // Generate mock trip with user logged in
   server.post(`${baseApiUrl}/login`, (schema, request) => {
-    const { user } = JSON.parse(request.requestBody);
-    schema.create('trip', tripFactory(user) as any);
+    const { name } = JSON.parse(request.requestBody);
+    const tripUuid = 'trip-uuid';
+    schema.create('trip', tripFactory(name, tripUuid) as any);
 
-    return new Response(200);
+    return new HttpResponse({ body: { name: 'user', tripUuid } })
   });
 
 }

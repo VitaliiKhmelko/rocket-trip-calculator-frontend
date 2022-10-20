@@ -1,11 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginHttpService {
+export class AuthenticationHttpService {
 
   constructor(private httpClient: HttpClient) { }
 
@@ -14,8 +14,8 @@ export class LoginHttpService {
    * @param name User name
    */
   login(name: string) {
-    return this.httpClient.post(`${environment.apiUrl}/login`, {
-      params: new HttpParams().append('name', name),
+    return this.httpClient.post<{ name: string, trip: string | undefined }>(`${environment.apiUrl}/login`, {
+      name
     })
   }
 }
