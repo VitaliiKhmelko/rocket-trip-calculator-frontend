@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { ExpensesType } from '../models/expenses.type';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Trip } from '../models/trip';
 
 /**
@@ -11,41 +11,6 @@ import { Trip } from '../models/trip';
   providedIn: 'root'
 })
 export class TripService {
-  private readonly trip: Trip = {
-    name: 'Trip to NY',
-    isFinished: false,
-    uuid: 'nytrip',
-    attenders:
-      [{
-        name: 'Adriana',
-        expenses: [
-          {
-            cost: 2.56,
-            type: ExpensesType.hotel,
-            description: '3 star hotel in NYC'
-          }, {
-            cost: 40.53,
-            type: ExpensesType.food,
-            description: 'Pizza Manhattan'
-          }
-        ]
-      },
-      {
-        name: 'Michael',
-        expenses: [
-          {
-            cost: 3.89,
-            type: ExpensesType.taxi,
-            description: 'from 12 ave to MET'
-          }, {
-            cost: 140.53,
-            type: ExpensesType.ticket,
-            description: 'IAD to JFK'
-          }
-        ]
-      }]
-  }
-
 
   constructor(private httpClient: HttpClient) { }
 
@@ -55,6 +20,6 @@ export class TripService {
    * @returns trip in progress
    */
   getByUserName(name: string): Observable<Trip> {
-    return of(this.trip)
+    return this.httpClient.get<Trip>(`${environment.apiUrl}/trip`)
   }
 }
