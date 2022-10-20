@@ -3,6 +3,9 @@ import { Observable, of } from 'rxjs';
 import { Attender } from 'src/app/models/attender';
 import { ExpensesType } from 'src/app/models/expenses.type';
 
+/**
+ * Show details about user's expenses during the trip
+ */
 @Component({
   selector: 'app-expenses-table',
   templateUrl: './expenses-table.component.html',
@@ -35,6 +38,21 @@ export class ExpensesTableComponent implements OnInit {
 
   trackByUserId(index: number, attender: Attender): string {
     return attender.name;
+  }
+
+  /**
+   * Add expenses for the user
+   * 
+   * @param user User in the trip to add expenses
+   */
+  addExpenses(user: string) {
+  }
+
+  /**
+   * Show details about user's expenses during the trip
+   * @param user User to show current expenses
+   */
+  showDetails(user: string) {
   }
 
 }

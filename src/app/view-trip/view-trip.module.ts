@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
 
@@ -18,6 +19,7 @@ import { ViewTripRoutingModule } from './view-trip-routing.module';
     ViewTripRoutingModule,
     SharedModule,
     MatTableModule,
+    MatButtonModule,
   ]
 })
 export class ViewTripModule { }
