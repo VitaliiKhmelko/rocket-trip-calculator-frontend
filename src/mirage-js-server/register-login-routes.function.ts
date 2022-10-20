@@ -1,4 +1,3 @@
-import { HttpResponse } from '@angular/common/http';
 import { Server } from 'miragejs';
 import { tripFactory } from './trip.factory';
 
@@ -18,7 +17,7 @@ export function registerLoginRoutes(
     const tripUuid = 'trip-uuid';
     schema.create('trip', tripFactory(name, tripUuid) as any);
 
-    return new HttpResponse({ body: { name: 'user', tripUuid } })
+    return { name: 'user', tripUuid };
   });
 
 }

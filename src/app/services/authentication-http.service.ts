@@ -14,7 +14,7 @@ export class AuthenticationHttpService {
    * @param name User name
    */
   login(name: string) {
-    return this.httpClient.post<{ name: string, trip: string | undefined }>(`${environment.apiUrl}/login`, {
+    return this.httpClient.post<{ name: string, tripUuid: string | undefined }>(`${environment.apiUrl}/login`, {
       name
     })
   }

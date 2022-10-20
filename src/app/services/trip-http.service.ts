@@ -16,12 +16,12 @@ export class TripHttpService {
 
   /**
    * Get trip that is in progress by attender's name
-   * @param name User name
+   * @param uuid Trip uuid
    * @returns trip in progress
    */
-  getByUserName(name: string): Observable<Trip> {
+  getByUuid(uuid: string): Observable<Trip> {
     return this.httpClient.get<Trip>(`${environment.apiUrl}/trip`, {
-      params: new HttpParams().append('name', name),
+      params: new HttpParams().append('uuid', uuid),
     })
   }
 }

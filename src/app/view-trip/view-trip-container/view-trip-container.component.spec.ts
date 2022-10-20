@@ -35,7 +35,7 @@ describe('ViewTripContainerComponent', () => {
 
     component.ngOnInit();
 
-    expect(spy).toHaveBeenCalledWith(viewTripComponentInitialized({ name: 'vitalii' }))
+    expect(spy).toHaveBeenCalledWith(viewTripComponentInitialized({ tripUuid: 'vitalii' }))
   });
 
   it('should dispatch viewTripComponentInitialized on addExpenses', () => {

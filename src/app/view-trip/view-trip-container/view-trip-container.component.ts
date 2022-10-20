@@ -18,7 +18,7 @@ export class ViewTripContainerComponent implements OnInit {
   ngOnInit(): void {
     this.trip$ = this.store.select(selectTrip);
 
-    this.store.dispatch(viewTripComponentInitialized({ name: 'vitalii' }));
+    this.store.dispatch(viewTripComponentInitialized({ tripUuid: 'vitalii' }));
   }
 
   addExpenses(name: string): void {

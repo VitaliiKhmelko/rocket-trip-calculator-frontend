@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 export const viewTripComponentInitialized = createAction(
   '[ViewTripComponent] Component initialized',
-  props<{ name: string }>(),
+  props<{ tripUuid: string }>(),
 );
 
 export const viewTripComponentAddExpensesClicked = createAction(

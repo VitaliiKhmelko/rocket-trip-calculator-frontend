@@ -7,7 +7,7 @@ export const loginButtonClicked = createAction(
 
 export const loginSuccess = createAction(
   '[Login] Load Logins Success',
-  props<{ data: { name: string, trip: string | undefined } }>()
+  props<{ name: string, tripUuid: string | undefined }>()
 );
 
 export const loginFailure = createAction(
