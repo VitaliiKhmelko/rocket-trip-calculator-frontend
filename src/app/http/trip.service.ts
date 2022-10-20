@@ -13,6 +13,7 @@ import { Trip } from '../models/trip';
 export class TripService {
   private readonly trip: Trip = {
     name: 'Trip to NY',
+    isFinished: false,
     uuid: 'nytrip',
     attenders:
       [{

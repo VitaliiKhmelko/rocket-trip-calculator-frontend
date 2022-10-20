@@ -5,7 +5,7 @@
     (showDetailsAction)="showDetails($event)"></app-expenses-table>
 
   <div class="page-actions">
-    <button mat-raised-button color="warn">
+    <button mat-raised-button color="warn" (click)="finishTrip(trip.uuid)">
       FINISH THE TRIP
     </button>
   </div>

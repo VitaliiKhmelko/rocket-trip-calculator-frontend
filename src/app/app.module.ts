@@ -7,7 +7,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TripEffects } from './redux/effects/trip.effects';
 import { tripReducer } from './redux/trip.reducer';
 
 @NgModule({
@@ -19,9 +18,7 @@ import { tripReducer } from './redux/trip.reducer';
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({ trip: tripReducer }, {}),
-    EffectsModule.forRoot([
-      TripEffects
-    ]),
+    EffectsModule.forRoot(),
     HttpClientModule,
   ],
   providers: [],

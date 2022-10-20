@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
@@ -16,6 +17,10 @@ describe('TripEffects', () => {
         provideMockActions(() => actions$),
         {
           provide: HttpClient,
+          useValue: {}
+        },
+        {
+          provide: MatDialog,
           useValue: {}
         }
       ]
