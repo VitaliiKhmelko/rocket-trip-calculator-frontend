@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Attender } from 'src/app/models/attender';
 import { ExpensesType } from 'src/app/models/expenses.type';
@@ -6,7 +6,8 @@ import { ExpensesType } from 'src/app/models/expenses.type';
 @Component({
   selector: 'app-expenses-table',
   templateUrl: './expenses-table.component.html',
-  styleUrls: ['./expenses-table.component.scss']
+  styleUrls: ['./expenses-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpensesTableComponent implements OnInit {
   readonly displayedColumns = ['name', 'expenses', 'actions']
@@ -30,6 +31,10 @@ export class ExpensesTableComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  trackByUserId(index: number, attender: Attender): string {
+    return attender.name;
   }
 
 }
