@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [{
-  path: 'auth',
+  path: 'sign-in',
   loadChildren: () => import('./authentication/authentication.module').then((module) => module.AuthenticationModule)
 }, {
   path: 'create-trip',
