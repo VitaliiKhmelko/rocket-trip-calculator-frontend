@@ -14,7 +14,7 @@ export class ViewTripContainerComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(viewTripComponentInitialized());
+    this.store.dispatch(viewTripComponentInitialized({ name: 'vitalii' }));
   }
 
   addExpenses(name: string): void {

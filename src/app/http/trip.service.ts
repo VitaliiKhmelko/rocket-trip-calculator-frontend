@@ -53,7 +53,7 @@ export class TripService {
    * @param name User name
    * @returns trip in progress
    */
-  getByUserName(name: string): Observable<Trip | undefined> {
+  getByUserName(name: string): Observable<Trip> {
     return of(this.trip)
   }
 }
