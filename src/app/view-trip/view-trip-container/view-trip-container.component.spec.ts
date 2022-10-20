@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MockComponents } from 'ng-mocks';
+import { ExpensesTableComponent } from '../expenses-table/expenses-table.component';
 import { ViewTripContainerComponent } from './view-trip-container.component';
 
 describe('ViewTripContainerComponent', () => {
@@ -8,7 +9,7 @@ describe('ViewTripContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewTripContainerComponent ]
+      declarations: [ViewTripContainerComponent, MockComponents(ExpensesTableComponent)]
     })
     .compileComponents();
 
