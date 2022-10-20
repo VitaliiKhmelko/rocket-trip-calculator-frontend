@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { Attender } from 'src/app/models/attender';
+import { ExpensesType } from 'src/app/models/expenses.type';
 
 @Component({
   selector: 'app-expenses-table',
@@ -9,16 +11,16 @@ import { of } from 'rxjs';
 export class ExpensesTableComponent implements OnInit {
   readonly displayedColumns = ['name', 'expenses', 'actions']
 
-  data$ = of([{
+  data$: Observable<Attender[]> = of([{
     name: 'Adriana',
     expenses: [
       {
         cost: 2.56,
-        type: 'hotel',
+        type: ExpensesType.hotel,
         description: '3 star hotel in NYC'
       }, {
         cost: 40.53,
-        type: 'food',
+        type: ExpensesType.food,
         description: 'Pizza Manhattan'
       }
     ] 

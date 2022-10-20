@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Expenses } from '../models/expenses';
 
 /**
  * Sum of all user expenses
@@ -12,8 +13,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TotalPipe implements PipeTransform {
 
-  transform(value: Array<{ cost: number }>): number {
-    return value.reduce((aggregated: number, element: { cost: number }) => {
+  transform(value: Expenses[]): number {
+    return value.reduce((aggregated: number, element: Expenses) => {
       return aggregated + element?.cost || 0
     }, 0);
   }
