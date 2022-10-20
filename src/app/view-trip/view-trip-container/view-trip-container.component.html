@@ -1,8 +1,14 @@
-<app-expenses-table [attenders]="trip.attenders" (addExpensesAction)="addExpenses($event)"
-  (showDetailsAction)="showDetails($event)"></app-expenses-table>
+<div *ngIf="trip; else loading">
+  <app-expenses-table [attenders]="trip.attenders" (addExpensesAction)="addExpenses($event)"
+    (showDetailsAction)="showDetails($event)"></app-expenses-table>
 
-<div class="page-actions">
-  <button mat-raised-button color="warn">
-    FINISH THE TRIP
-  </button>
+  <div class="page-actions">
+    <button mat-raised-button color="warn">
+      FINISH THE TRIP
+    </button>
+  </div>
 </div>
+
+<ng-template #loading>
+  Your trip is loading
+</ng-template>
