@@ -1,10 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { TripService } from './trip.service';
+import { TripHttpService } from './trip-http.service';
 
 describe('TripService', () => {
-  let service: TripService;
+  let service: TripHttpService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -12,7 +12,7 @@ describe('TripService', () => {
         HttpClientTestingModule
       ]
     });
-    service = TestBed.inject(TripService);
+    service = TestBed.inject(TripHttpService);
   });
 
   it('should be created', () => {

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
-import { TripService } from 'src/app/http/trip.service';
 import { Trip } from 'src/app/models/trip';
+import { TripHttpService } from 'src/app/services/trip-http.service';
 import { FinishTripDialogComponent } from 'src/app/view-trip/finish-trip-dialog/finish-trip-dialog.component';
 import { finishTrip, finishTripCanceled } from '../actions/finish-trip.actions';
 import { loadTripsFailure, loadTripsSuccess } from '../actions/load-trip.actions';
@@ -38,5 +38,5 @@ export class TripEffects {
     )
   })
 
-  constructor(private actions$: Actions, private tripService: TripService, private dialog: MatDialog) { }
+  constructor(private actions$: Actions, private tripService: TripHttpService, private dialog: MatDialog) { }
 }
