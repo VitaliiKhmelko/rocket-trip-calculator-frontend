@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockComponents } from 'ng-mocks';
 import { viewTripComponentAddExpensesClicked, viewTripComponentInitialized, viewTripComponentShowDetailsClicked } from 'src/app/redux/actions/view-trip-component.actions';
@@ -15,7 +16,11 @@ describe('ViewTripContainerComponent', () => {
       declarations: [ViewTripContainerComponent, MockComponents(ExpensesTableComponent)],
       providers: [
         provideMockStore(),
-      ]
+        {
+          provide: Router,
+          useValue: jasmine.createSpyObj('Router', ['navigate'])
+        }
+      ],
     })
     .compileComponents();
 

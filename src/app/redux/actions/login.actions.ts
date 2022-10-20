@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { User } from 'src/app/models/user';
 
 export const loginButtonClicked = createAction(
   '[SignInComponent] login button clicked',
@@ -7,7 +8,7 @@ export const loginButtonClicked = createAction(
 
 export const loginSuccess = createAction(
   '[Login] Load Logins Success',
-  props<{ name: string, tripUuid: string | undefined }>()
+  props<{ payload: User }>()
 );
 
 export const loginFailure = createAction(
