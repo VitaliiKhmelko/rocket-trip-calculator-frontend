@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Attender } from 'src/app/models/attender';
-import { ExpensesType } from 'src/app/models/expenses.type';
 
 /**
  * Show details about user's expenses during the trip
@@ -12,29 +10,25 @@ import { ExpensesType } from 'src/app/models/expenses.type';
   styleUrls: ['./expenses-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExpensesTableComponent implements OnInit {
-  readonly displayedColumns = ['name', 'expenses', 'actions']
+export class ExpensesTableComponent {
+  readonly displayedColumns = ['name', 'expenses', 'actions'];
 
-  data$: Observable<Attender[]> = of([{
-    name: 'Adriana',
-    expenses: [
-      {
-        cost: 2.56,
-        type: ExpensesType.hotel,
-        description: '3 star hotel in NYC'
-      }, {
-        cost: 40.53,
-        type: ExpensesType.food,
-        description: 'Pizza Manhattan'
-      }
-    ] 
-  }])
+  /**
+   * Attenders for the current trip
+   */
+  @Input() attenders: Attender[] | undefined;
+
+  /**
+   * Emits a new value every time when user hits Add expenses button
+   */
+  @Output() addExpensesAction = new EventEmitter<string>();
+
+  /**
+   * Emits a new value every time when user hits show details button
+   */
+  @Output() showDetailsAction = new EventEmitter<string>();
 
   constructor() { }
-
-  ngOnInit(): void {
-
-  }
 
   trackByUserId(index: number, attender: Attender): string {
     return attender.name;
@@ -46,6 +40,7 @@ export class ExpensesTableComponent implements OnInit {
    * @param user User in the trip to add expenses
    */
   addExpenses(user: string) {
+    this.addExpensesAction.emit(user);
   }
 
   /**
@@ -53,6 +48,7 @@ export class ExpensesTableComponent implements OnInit {
    * @param user User to show current expenses
    */
   showDetails(user: string) {
+    this.showDetailsAction.emit();
   }
 
 }

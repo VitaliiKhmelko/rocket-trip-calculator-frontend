@@ -1,22 +1,24 @@
-<table mat-table [dataSource]="data$" [trackBy]="trackByUserId">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
+<ng-container *ngIf="attenders">
+  <table mat-table [dataSource]="attenders" [trackBy]="trackByUserId">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="expenses">
-    <th mat-header-cell *matHeaderCellDef> Expenses </th>
-    <td mat-cell *matCellDef="let element"> {{element.expenses | total | currency }} </td>
-  </ng-container>
+    <ng-container matColumnDef="expenses">
+      <th mat-header-cell *matHeaderCellDef> Expenses </th>
+      <td mat-cell *matCellDef="let element"> {{element.expenses | total | currency }} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-raised-button color="primary" (click)="addExpenses(element.name)">Add expenses</button>
-      <button mat-raised-button color="primary" (click)="showDetails(element.name)">Show details</button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" (click)="addExpenses(element.name)">Add expenses</button>
+        <button mat-raised-button color="primary" (click)="showDetails(element.name)">Show details</button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</ng-container>
