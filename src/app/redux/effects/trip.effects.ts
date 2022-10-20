@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { Trip } from 'src/app/models/trip';
+import { TripCalculatorService } from 'src/app/services/trip-calculator.service';
 import { TripHttpService } from 'src/app/services/trip-http.service';
 import { FinishTripDialogComponent } from 'src/app/view-trip/finish-trip-dialog/finish-trip-dialog.component';
 import { finishTrip, finishTripCanceled } from '../actions/finish-trip.actions';
@@ -28,8 +29,9 @@ export class TripEffects {
   showTripExpensesDialog$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(viewTripComponentFinishTripClicked),
-      exhaustMap(() => {
-        return this.dialog.open(FinishTripDialogComponent).afterClosed().pipe(
+      exhaustMap(({ trip }) => {
+        const tripResult = this.tripCalculatorService.calculateBelongings(trip.attenders)
+        return this.dialog.open(FinishTripDialogComponent, { data: tripResult }).afterClosed().pipe(
           map((result: string) => {
             return result ? finishTrip() : finishTripCanceled()
           })
@@ -38,5 +40,5 @@ export class TripEffects {
     )
   })
 
-  constructor(private actions$: Actions, private tripService: TripHttpService, private dialog: MatDialog) { }
+  constructor(private actions$: Actions, private tripService: TripHttpService, private dialog: MatDialog, private tripCalculatorService: TripCalculatorService) { }
 }

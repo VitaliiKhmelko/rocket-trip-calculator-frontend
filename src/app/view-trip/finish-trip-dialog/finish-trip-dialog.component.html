@@ -1,7 +1,11 @@
 <h2 mat-dialog-title>Finish the trip?</h2>
 
 <mat-dialog-content>
-  <p>Find expenses below</p>
+  <h3>During the trip your group has spent <strong>{{ data.total | currency }}</strong></h3>
+  
+  <table mat-table [dataSource]="data.belongings">
+  
+  </table>
 </mat-dialog-content>
 
 <mat-dialog-actions>

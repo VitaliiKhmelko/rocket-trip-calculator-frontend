@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Attender } from 'src/app/models/attender';
+import { Attendant } from 'src/app/models/attender';
 
 /**
  * Show details about user's expenses during the trip
@@ -16,7 +16,7 @@ export class ExpensesTableComponent {
   /**
    * Attenders for the current trip
    */
-  @Input() attenders: Attender[] | undefined;
+  @Input() attenders: Attendant[] | undefined;
 
   /**
    * Emits a new value every time when user hits Add expenses button
@@ -30,7 +30,7 @@ export class ExpensesTableComponent {
 
   constructor() { }
 
-  trackByUserId(index: number, attender: Attender): string {
+  trackByUserId(index: number, attender: Attendant): string {
     return attender.name;
   }
 

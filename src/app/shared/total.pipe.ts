@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Expenses } from '../models/expenses';
+import { TripCalculatorService } from '../services/trip-calculator.service';
 
 /**
  * Sum of all user expenses
@@ -13,10 +14,10 @@ import { Expenses } from '../models/expenses';
 })
 export class TotalPipe implements PipeTransform {
 
-  transform(value: Expenses[]): number {
-    return value.reduce((aggregated: number, element: Expenses) => {
-      return aggregated + element?.cost || 0
-    }, 0);
+  constructor(private tripCalculator: TripCalculatorService) { }
+
+  transform(expenses: Expenses[]): number {
+    return this.tripCalculator.calculateUserExpenses(expenses)
   }
 
 }

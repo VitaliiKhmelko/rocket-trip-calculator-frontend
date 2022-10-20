@@ -35,8 +35,8 @@ export class ViewTripContainerComponent implements OnInit {
     this.store.dispatch(viewTripComponentShowDetailsClicked({ name }))
   }
 
-  finishTrip(uuid: string) {
-    this.store.dispatch(viewTripComponentFinishTripClicked({ uuid }))
+  finishTrip(trip: Trip) {
+    this.store.dispatch(viewTripComponentFinishTripClicked({ trip }));
   }
 
 }

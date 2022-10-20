@@ -1,5 +1,5 @@
 import { address, datatype, name } from 'faker';
-import { Attender } from 'src/app/models/attender';
+import { Attendant } from 'src/app/models/attender';
 import { Expenses } from 'src/app/models/expenses';
 
 /**
@@ -12,7 +12,7 @@ export const tripFactory = (user: string, tripUuid: string) => {
     uuid: tripUuid,
     attenders: (() => {
 
-      const attenders: Attender[] = [{
+      const attenders: Attendant[] = [{
         name: user,
         expenses: generateExpenses(),
       }];

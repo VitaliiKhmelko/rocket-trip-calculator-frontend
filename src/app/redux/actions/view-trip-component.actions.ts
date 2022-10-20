@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Trip } from 'src/app/models/trip';
 
 export const viewTripComponentInitialized = createAction(
   '[ViewTripComponent] Component initialized',
@@ -17,7 +18,7 @@ export const viewTripComponentShowDetailsClicked = createAction(
 
 export const viewTripComponentFinishTripClicked = createAction(
   '[ViewTripComponent] Finish trip button clicked',
-  props<{ uuid: string }>()
+  props<{ trip: Trip }>()
 )
 
 
