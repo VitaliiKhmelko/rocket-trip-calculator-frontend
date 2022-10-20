@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TripEffects } from './redux/effects/trip.effects';
+import { tripReducer } from './redux/trip.reducer';
 
 @NgModule({
   declarations: [
@@ -17,10 +18,11 @@ import { TripEffects } from './redux/effects/trip.effects';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({ trip: tripReducer }, {}),
+    EffectsModule.forRoot([
+      TripEffects
+    ]),
     HttpClientModule,
-    EffectsModule.forFeature([TripEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]

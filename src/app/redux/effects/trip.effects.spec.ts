@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
@@ -12,7 +13,11 @@ describe('TripEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         TripEffects,
-        provideMockActions(() => actions$)
+        provideMockActions(() => actions$),
+        {
+          provide: HttpClient,
+          useValue: {}
+        }
       ]
     });
 
