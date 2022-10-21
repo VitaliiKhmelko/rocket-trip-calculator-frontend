@@ -32,7 +32,7 @@ export class TripEffects {
     return this.actions$.pipe(
       ofType(viewTripComponentFinishTripClicked),
       exhaustMap(({ trip }) => {
-        const tripResult = this.tripCalculatorService.calculateBelongings(trip.attenders)
+        const tripResult = this.tripCalculatorService.calculateBelongings(trip.participators)
         return this.dialog.open(FinishTripDialogComponent, { data: tripResult, width: '700px' }).afterClosed().pipe(
           map((result: string) => {
             return result ? finishTrip() : finishTripCanceled()
@@ -61,7 +61,7 @@ export class TripEffects {
         if (this.userService.User) {
           this.userService.User = {
             name: this.userService.User.name,
-            tripUuid: id,
+            tripId: id,
           }
           this.router.navigate([''])
         }

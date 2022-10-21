@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Attendant } from '../models/attender';
+import { Participator } from '../models/participator';
 
 import { TripCalculatorService } from './trip-calculator.service';
 
@@ -25,7 +25,7 @@ describe('TripCalculatorService', () => {
 
 
   it('should make calculations', (): void => {
-    const attendants: Attendant[] = [{
+    const participators: Participator[] = [{
       name: 'John',
       expenses: [{ cost: 2.56 }, { cost: 0.01 }, { cost: 0.02 }]
     }, {
@@ -36,7 +36,7 @@ describe('TripCalculatorService', () => {
       expenses: [{ cost: 13.01 }, { cost: 4.07 }, { cost: 3.09 }]
     }]
 
-    const result = service.calculateBelongings(attendants);
+    const result = service.calculateBelongings(participators);
 
     expect(result.total).toBe(43.32);
     expect(result.belongings).toEqual([
@@ -47,7 +47,7 @@ describe('TripCalculatorService', () => {
 
   //Example from task requirements
   it('should make calculations', (): void => {
-    const attendants: Attendant[] = [{
+    const participators: Participator[] = [{
       name: 'Adriana',
       expenses: [{ cost: 5.75 }, { cost: 35.00 }, { cost: 12.79 }]
     }, {
@@ -58,7 +58,7 @@ describe('TripCalculatorService', () => {
       expenses: [{ cost: 10.00 }, { cost: 20.00 }, { cost: 38.41 }, { cost: 45.00 }]
     }]
 
-    const result = service.calculateBelongings(attendants);
+    const result = service.calculateBelongings(participators);
 
     expect(result.total).toBe(217.18);
     expect(result.belongings).toEqual([

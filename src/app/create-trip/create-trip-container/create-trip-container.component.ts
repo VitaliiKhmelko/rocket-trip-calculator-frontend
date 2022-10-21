@@ -20,14 +20,21 @@ export class CreateTripContainerComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private store: Store) { }
 
   ngOnInit(): void {
-    if (this.userService.User?.tripUuid) {
+    if (this.userService.User?.tripId) {
       this.router.navigate([''])
     }
   }
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.store.dispatch(createTripComponentCreateButtonClicked({ trip: this.form.value as Trip }))
+      const trip: Trip = this.form.value as Trip;
+
+      trip.participators = [{
+        name: 'Vitalii Khmelko',
+        expenses: []
+      }]
+
+      this.store.dispatch(createTripComponentCreateButtonClicked({ trip }))
     }
   }
 

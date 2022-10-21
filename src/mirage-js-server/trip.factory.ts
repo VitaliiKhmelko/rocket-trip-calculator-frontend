@@ -1,6 +1,6 @@
 import { address, datatype, name } from 'faker';
-import { Attendant } from 'src/app/models/attender';
 import { Expenses } from 'src/app/models/expenses';
+import { Participator } from 'src/app/models/participator';
 
 /**
  * Factory to create a mock trip entity
@@ -12,19 +12,19 @@ export const tripFactory = (user: string, tripUuid: string) => {
     uuid: tripUuid,
     attenders: (() => {
 
-      const attenders: Attendant[] = [{
+      const participators: Participator[] = [{
         name: user,
         expenses: generateExpenses(),
       }];
 
       for (let i = 0; i < datatype.number({ min: 3, max: 5 }); i++) {
-        attenders.push({
+        participators.push({
           name: name.findName(),
           expenses: generateExpenses(),
         })
       }
 
-      return attenders;
+      return participators;
     })(),
   }
 };

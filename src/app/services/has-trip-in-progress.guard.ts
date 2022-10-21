@@ -12,7 +12,7 @@ export class HasTripInProgressGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.userService?.User?.tripUuid) {
+    if (this.userService?.User?.tripId) {
       return true;
     }
 

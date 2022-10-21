@@ -1,9 +1,9 @@
 import { Expenses } from "./expenses";
 
 /**
- * Trip attendant who may have some expenses
+ * Trip participator with his/her spends
  */
-export interface Attendant {
+export interface Participator {
   name: string,
   expenses: Expenses[],
 }

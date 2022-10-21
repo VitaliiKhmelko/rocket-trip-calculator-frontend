@@ -3,5 +3,5 @@
  */
 export interface User {
   name: string,
-  tripUuid?: string,
+  tripId?: string,
 }

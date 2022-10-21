@@ -1,4 +1,4 @@
-import { Attendant } from "./attender";
+import { Participator } from "./participator";
 
 /**
  * Represents one trip
@@ -8,5 +8,5 @@ export interface Trip {
   isFinished: boolean,
   description?: string,
   uuid: string,
-  attenders: Attendant[],
+  participators: Participator[],
 }

@@ -1,7 +1,7 @@
 <div *ngIf="trip$ | async as trip; else loading">
   <h1>{{ trip.name }}</h1>
   <p>{{ trip.description }} </p>
-  <app-expenses-table [attenders]="trip.attenders" (addExpensesAction)="addExpenses($event)"
+  <app-expenses-table [participators]="trip.participators" (addExpensesAction)="addExpenses($event)"
     (showDetailsAction)="showDetails($event)"></app-expenses-table>
 
   <div class="page-actions">

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Attendant } from '../models/attender';
 import { Expenses } from '../models/expenses';
+import { Participator } from '../models/participator';
 import { UserBelongings } from '../models/user-belongings';
 import { round } from '../shared/calculations.helper';
 
@@ -16,17 +16,17 @@ export class TripCalculatorService {
 
   /**
    * Calculates who owes whom and how much
-   * @param attendants Trip attendants
+   * @param participators Trip participators
    */
-  calculateBelongings(attendants: Attendant[]): { total: number, belongings: UserBelongings[] } {
-    const actualAttendantsSpends = this.getActualAttendantsSpends(attendants);
+  calculateBelongings(participators: Participator[]): { total: number, belongings: UserBelongings[] } {
+    const participatorSpends = this.getActualParticipatorSpends(participators);
 
-    const totalSpends = round(actualAttendantsSpends.reduce((value: number, { amount }) => {
+    const totalSpends = round(participatorSpends.reduce((value: number, { amount }) => {
       return value += amount;
     }, 0));
 
 
-    const belongings: UserBelongings[] = this.calculateStudentsBelongings(actualAttendantsSpends, totalSpends);
+    const belongings: UserBelongings[] = this.calculateStudentsBelongings(participatorSpends, totalSpends);
 
     return {
       total: totalSpends,
@@ -50,33 +50,33 @@ export class TripCalculatorService {
   /**
    * Get amount of money that has been spent by each user during the trip
    * 
-   * @param attendants Trip attendants
+   * @param participators Trip participators
    */
-  private getActualAttendantsSpends(attendants: Attendant[]): { name: string, amount: number }[] {
-    const actualSpendsForEachAttendant: { name: string, amount: number }[] = [];
+  private getActualParticipatorSpends(participators: Participator[]): { name: string, amount: number }[] {
+    const actualSpendsForEachParticipator: { name: string, amount: number }[] = [];
 
-    if (attendants.length > 0) {
-      actualSpendsForEachAttendant.push({
-        name: attendants[0].name,
-        amount: this.calculateStudentExpenses(attendants[0].expenses),
+    if (participators.length > 0) {
+      actualSpendsForEachParticipator.push({
+        name: participators[0].name,
+        amount: this.calculateStudentExpenses(participators[0].expenses),
       });
 
-      for (let index = 1; index < attendants.length; index++) {
-        const attendant: Attendant = attendants[index];
+      for (let index = 1; index < participators.length; index++) {
+        const participator: Participator = participators[index];
 
-        const amount = this.calculateStudentExpenses(attendant.expenses);
+        const amount = this.calculateStudentExpenses(participator.expenses);
 
-        // Sort array by each user's amount. Attendants who owe are at the end of the array.
-        let attendantIndex = 0;
-        while (attendantIndex < actualSpendsForEachAttendant.length && amount < actualSpendsForEachAttendant[attendantIndex].amount) {
-          attendantIndex++;
+        // Sort array by each user's amount. participators who owe are at the end of the array.
+        let participatorIndex = 0;
+        while (participatorIndex < actualSpendsForEachParticipator.length && amount < actualSpendsForEachParticipator[participatorIndex].amount) {
+          participatorIndex++;
         }
 
-        actualSpendsForEachAttendant.splice(attendantIndex, 0, { name: attendant.name, amount })
+        actualSpendsForEachParticipator.splice(participatorIndex, 0, { name: participator.name, amount })
       }
     }
 
-    return actualSpendsForEachAttendant;
+    return actualSpendsForEachParticipator;
   }
 
   /**

@@ -1,5 +1,5 @@
-<ng-container *ngIf="attenders">
-  <table mat-table [dataSource]="attenders" [trackBy]="trackByUserName">
+<ng-container *ngIf="participators">
+  <table mat-table [dataSource]="participators" [trackBy]="trackByUserName">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>

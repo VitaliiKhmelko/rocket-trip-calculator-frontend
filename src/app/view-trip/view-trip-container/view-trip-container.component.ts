@@ -17,7 +17,7 @@ export class ViewTripContainerComponent implements OnInit {
   constructor(private store: Store, private userService: UserService) { }
 
   ngOnInit(): void {
-    const tripId = this.userService.User?.tripUuid;
+    const tripId = this.userService.User?.tripId;
 
     if (tripId) {
       this.trip$ = this.store.select(selectTrip);
