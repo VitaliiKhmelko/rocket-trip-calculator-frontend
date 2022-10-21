@@ -19,8 +19,8 @@ export class TripEffects {
   loadTrip$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(viewTripComponentInitialized),
-      switchMap(({ tripUuid }) => {
-        return this.tripService.get$(tripUuid).pipe(
+      switchMap(({ tripId }) => {
+        return this.tripService.get$(tripId).pipe(
           map((trip: Trip) => loadTripsSuccess({ data: trip })),
           catchError((error) => of(loadTripsFailure(error)))
         )

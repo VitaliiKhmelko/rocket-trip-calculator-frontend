@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Trip } from 'src/app/models/trip';
@@ -15,16 +14,15 @@ import { UserService } from 'src/app/services/user.service';
 export class ViewTripContainerComponent implements OnInit {
   trip$: Observable<Trip | undefined> | undefined = undefined;
 
-  constructor(private store: Store, private router: Router, private userService: UserService) { }
+  constructor(private store: Store, private userService: UserService) { }
 
   ngOnInit(): void {
-    if (!this.userService.User) {
-      this.router.navigate(['sign-in'])
+    const tripId = this.userService.User?.tripUuid;
+
+    if (tripId) {
+      this.trip$ = this.store.select(selectTrip);
+      this.store.dispatch(viewTripComponentInitialized({ tripId }));
     }
-
-    this.trip$ = this.store.select(selectTrip);
-
-    this.store.dispatch(viewTripComponentInitialized({ tripUuid: 'vitalii' }));
   }
 
   addExpenses(name: string): void {

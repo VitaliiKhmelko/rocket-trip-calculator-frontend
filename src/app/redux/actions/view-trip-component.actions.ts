@@ -3,7 +3,7 @@ import { Trip } from 'src/app/models/trip';
 
 export const viewTripComponentInitialized = createAction(
   '[ViewTripComponent] Component initialized',
-  props<{ tripUuid: string }>(),
+  props<{ tripId: string }>(),
 );
 
 export const viewTripComponentAddExpensesClicked = createAction(
