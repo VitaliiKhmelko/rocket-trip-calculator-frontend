@@ -5,6 +5,7 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockComponents, MockDirectives } from 'ng-mocks';
 import { loginButtonClicked } from 'src/app/redux/actions/login.actions';
+import { UserService } from 'src/app/services/user.service';
 
 import { SignInComponent } from './sign-in.component';
 
@@ -23,6 +24,10 @@ describe('SignInComponent', () => {
         {
           provide: FormBuilder,
           useValue: jasmine.createSpyObj('FormBuilder', ['group'])
+        },
+        {
+          provide: UserService,
+          useValue: {}
         }
       ]
     })
