@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -20,8 +20,15 @@ export class TripHttpService {
    * @returns trip in progress
    */
   get$(uuid: string): Observable<Trip> {
-    return this.httpClient.get<Trip>(`${environment.apiUrl}/trip`, {
-      params: new HttpParams().append('uuid', uuid),
-    })
+    return this.httpClient.get<Trip>(`${environment.apiUrl}/trips/${uuid}`);
+  }
+
+  /**
+   * Creates a new trip
+   * @param trip new trip to create
+   * @returns trip id
+   */
+  put$(trip: Trip): Observable<string> {
+    return this.httpClient.put<string>(`${environment.apiUrl}/trips`, trip);
   }
 }

@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { Trip } from 'src/app/models/trip';
 import { TripCalculatorService } from 'src/app/services/trip-calculator.service';
 import { TripHttpService } from 'src/app/services/trip-http.service';
+import { UserService } from 'src/app/services/user.service';
 import { FinishTripDialogComponent } from 'src/app/view-trip/finish-trip-dialog/finish-trip-dialog.component';
+import { createTripComponentCreateButtonClicked } from '../actions/create-trip-component.actions.ts.actions';
+import { createTripFailure, createTripSuccess } from '../actions/create-trip.ts.actions';
 import { finishTrip, finishTripCanceled } from '../actions/finish-trip.actions';
 import { loadTripsFailure, loadTripsSuccess } from '../actions/load-trip.actions';
 import { viewTripComponentFinishTripClicked, viewTripComponentInitialized } from '../actions/view-trip-component.actions';
-
-
 
 @Injectable()
 export class TripEffects {
@@ -38,7 +40,40 @@ export class TripEffects {
         )
       })
     )
-  })
+  });
 
-  constructor(private actions$: Actions, private tripService: TripHttpService, private dialog: MatDialog, private tripCalculatorService: TripCalculatorService) { }
+  createTrip$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createTripComponentCreateButtonClicked),
+      exhaustMap(({ trip }) => {
+        return this.tripService.put$(trip).pipe(
+          map((tripId: string) => createTripSuccess({ payload: tripId })),
+          catchError((error) => of(createTripFailure({ error })))
+        )
+      })
+    )
+  });
+
+  createTripSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createTripSuccess),
+      map(({ payload: id }) => {
+        if (this.userService.User) {
+          this.userService.User = {
+            name: this.userService.User.name,
+            tripUuid: id,
+          }
+          this.router.navigate([''])
+        }
+      })
+    )
+  }, { dispatch: false });
+
+  constructor(
+    private actions$: Actions,
+    private tripService: TripHttpService,
+    private dialog: MatDialog,
+    private tripCalculatorService: TripCalculatorService,
+    private userService: UserService,
+    private router: Router) { }
 }

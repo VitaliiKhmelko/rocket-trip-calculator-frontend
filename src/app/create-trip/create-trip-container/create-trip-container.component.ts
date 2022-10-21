@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Trip } from 'src/app/models/trip';
+import { createTripComponentCreateButtonClicked } from 'src/app/redux/actions/create-trip-component.actions.ts.actions';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,12 +12,22 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./create-trip-container.component.scss']
 })
 export class CreateTripContainerComponent implements OnInit {
+  form = this.formBuilder.group({
+    name: new FormControl('', [Validators.required]),
+    description: new FormControl('')
+  })
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private store: Store) { }
 
   ngOnInit(): void {
     if (this.userService.User?.tripUuid) {
       this.router.navigate([''])
+    }
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      this.store.dispatch(createTripComponentCreateButtonClicked({ trip: this.form.value as Trip }))
     }
   }
 
