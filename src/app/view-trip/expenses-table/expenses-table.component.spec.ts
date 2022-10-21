@@ -20,4 +20,24 @@ describe('ExpensesTableComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('trackByUserId', () => {
+    expect(component.trackByUserName(0, { name: 'Bryan', expenses: [] })).toEqual('Bryan')
+  })
+
+  it('should emit addExpensesAction on addExpenses', () => {
+    const spy = spyOn(component.addExpensesAction, 'emit');
+
+    component.addExpenses('Helga');
+
+    expect(spy).toHaveBeenCalledWith('Helga')
+  });
+
+  it('should emit showDetailsAction on showDetails', () => {
+    const spy = spyOn(component.showDetailsAction, 'emit');
+
+    component.showDetails('Helga');
+
+    expect(spy).toHaveBeenCalledWith('Helga')
+  });
 });

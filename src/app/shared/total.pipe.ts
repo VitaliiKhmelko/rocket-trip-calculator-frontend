@@ -17,7 +17,7 @@ export class TotalPipe implements PipeTransform {
   constructor(private tripCalculator: TripCalculatorService) { }
 
   transform(expenses: Expenses[]): number {
-    return this.tripCalculator.calculateUserExpenses(expenses)
+    return this.tripCalculator.calculateStudentExpenses(expenses)
   }
 
 }

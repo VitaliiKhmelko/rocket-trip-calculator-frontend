@@ -101,7 +101,10 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "codeCoverage": true
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "./src/mirage-js-server/**/*"
+            ]
           }
         }
       }

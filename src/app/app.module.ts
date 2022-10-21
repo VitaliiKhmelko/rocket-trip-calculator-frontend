@@ -21,7 +21,10 @@ import { tripReducer } from './redux/trip.reducer';
     EffectsModule.forRoot(),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{
+    provide: 'Window',
+    useValue: window,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

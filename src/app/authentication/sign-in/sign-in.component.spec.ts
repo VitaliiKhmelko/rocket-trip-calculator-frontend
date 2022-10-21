@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormControlName, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, FormControlName, FormGroup, FormGroupDirective } from '@angular/forms';
 import { MatCard, MatCardContent, MatCardFooter } from '@angular/material/card';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockComponents, MockDirectives } from 'ng-mocks';
+import { loginButtonClicked } from 'src/app/redux/actions/login.actions';
 
 import { SignInComponent } from './sign-in.component';
 
@@ -35,4 +36,17 @@ describe('SignInComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should dispatch event on onSubmit', () => {
+    const spy = spyOn(TestBed.inject(MockStore), 'dispatch');
+
+    component.form = {
+      valid: true,
+      value: { name: 'Sarah' }
+    } as FormGroup;
+
+    component.onSubmit();
+
+    expect(spy).toHaveBeenCalledWith(loginButtonClicked({ name: 'Sarah' }))
+  })
 });

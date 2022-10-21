@@ -13,7 +13,7 @@ export class LoginEffects {
     return this.actions$.pipe(
       ofType(loginButtonClicked),
       exhaustMap(({ name }) => {
-        return this.authenticationService.login(name);
+        return this.authenticationService.login$(name);
       }),
       map((user: User) => {
         return loginSuccess({ payload: user })

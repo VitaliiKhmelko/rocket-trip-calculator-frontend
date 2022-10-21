@@ -19,7 +19,7 @@ export class TripHttpService {
    * @param uuid Trip uuid
    * @returns trip in progress
    */
-  getByUuid(uuid: string): Observable<Trip> {
+  get$(uuid: string): Observable<Trip> {
     return this.httpClient.get<Trip>(`${environment.apiUrl}/trip`, {
       params: new HttpParams().append('uuid', uuid),
     })

@@ -30,7 +30,7 @@ export class ExpensesTableComponent {
 
   constructor() { }
 
-  trackByUserId(index: number, attender: Attendant): string {
+  trackByUserName(index: number, attender: Attendant): string {
     return attender.name;
   }
 
@@ -48,7 +48,7 @@ export class ExpensesTableComponent {
    * @param user User to show current expenses
    */
   showDetails(user: string) {
-    this.showDetailsAction.emit();
+    this.showDetailsAction.emit(user);
   }
 
 }
