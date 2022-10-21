@@ -3,8 +3,21 @@
 <mat-dialog-content>
   <h3>During the trip your group has spent <strong>{{ data.total | currency }}</strong></h3>
   
-  <table mat-table [dataSource]="data.belongings">
+  <table mat-table [dataSource]="data.belongings" *ngIf="data.belongings">
+    <ng-container matColumnDef="who">
+      <td mat-cell *matCellDef="let element"> <strong>{{element.who}}</strong> owes </td>
+    </ng-container>
   
+    <ng-container matColumnDef="whom">
+      <td mat-cell *matCellDef="let element"> <strong>{{element.whom }}</strong> </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="amount">
+      <td mat-cell *matCellDef="let element"> {{element.amount | currency }} </td>
+    </ng-container>
+  
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
   </table>
 </mat-dialog-content>
 

@@ -8,6 +8,7 @@ import { UserBelongings } from 'src/app/models/user-belongings';
   styleUrls: ['./finish-trip-dialog.component.scss']
 })
 export class FinishTripDialogComponent implements OnInit {
+  readonly displayedColumns = ['who', 'whom', 'amount']
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { total: number, belongings: UserBelongings[] }) {
 

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
+import { MatDialog, MatDialogActions, MatDialogContent, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatRowDef } from '@angular/material/table';
 import { MockDirectives } from 'ng-mocks';
 
 import { FinishTripDialogComponent } from './finish-trip-dialog.component';
@@ -10,7 +11,17 @@ describe('FinishTripDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FinishTripDialogComponent, MockDirectives(MatDialogActions, MatDialogContent)]
+      declarations: [FinishTripDialogComponent, MockDirectives(MatDialogActions, MatDialogContent, MatRowDef)],
+      providers: [
+        {
+          provide: MatDialog,
+          useValue: jasmine.createSpyObj('MatDialog', ['open'])
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {},
+        }
+      ]
     })
     .compileComponents();
 
