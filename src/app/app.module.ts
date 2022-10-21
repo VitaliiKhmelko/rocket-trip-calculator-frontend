@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { tripReducer } from './redux/trip.reducer';
+import { WINDOW } from './shared/window-token';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { tripReducer } from './redux/trip.reducer';
     HttpClientModule,
   ],
   providers: [{
-    provide: 'Window',
+    provide: WINDOW,
     useValue: window,
   }],
   bootstrap: [AppComponent]

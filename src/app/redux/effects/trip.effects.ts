@@ -31,7 +31,7 @@ export class TripEffects {
       ofType(viewTripComponentFinishTripClicked),
       exhaustMap(({ trip }) => {
         const tripResult = this.tripCalculatorService.calculateBelongings(trip.attenders)
-        return this.dialog.open(FinishTripDialogComponent, { data: tripResult }).afterClosed().pipe(
+        return this.dialog.open(FinishTripDialogComponent, { data: tripResult, width: '700px' }).afterClosed().pipe(
           map((result: string) => {
             return result ? finishTrip() : finishTripCanceled()
           })
