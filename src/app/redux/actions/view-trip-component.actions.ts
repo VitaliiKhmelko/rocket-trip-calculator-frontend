@@ -11,11 +11,6 @@ export const viewTripComponentAddExpensesClicked = createAction(
   props<{ name: string }>()
 )
 
-export const viewTripComponentShowDetailsClicked = createAction(
-  '[ViewTripComponent] Add expenses button clicked',
-  props<{ name: string }>()
-)
-
 export const viewTripComponentFinishTripClicked = createAction(
   '[ViewTripComponent] Finish trip button clicked',
   props<{ trip: Trip }>()

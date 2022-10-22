@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockComponents } from 'ng-mocks';
-import { viewTripComponentAddExpensesClicked, viewTripComponentInitialized, viewTripComponentShowDetailsClicked } from 'src/app/redux/actions/view-trip-component.actions';
+import { viewTripComponentAddExpensesClicked, viewTripComponentInitialized } from 'src/app/redux/actions/view-trip-component.actions';
 import { UserService } from 'src/app/services/user.service';
 import { ExpensesTableComponent } from '../expenses-table/expenses-table.component';
 import { ViewTripContainerComponent } from './view-trip-container.component';
@@ -51,11 +51,4 @@ describe('ViewTripContainerComponent', () => {
     expect(spy).toHaveBeenCalledWith(viewTripComponentAddExpensesClicked({ name: 'name' }))
   });
 
-  it('should dispatch viewTripComponentShowDetailsClicked on showDetails', () => {
-    const spy = spyOn(mockStore, 'dispatch');
-
-    component.showDetails('name');
-
-    expect(spy).toHaveBeenCalledWith(viewTripComponentShowDetailsClicked({ name: 'name' }))
-  });
 });

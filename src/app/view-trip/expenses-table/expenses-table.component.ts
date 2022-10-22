@@ -23,11 +23,6 @@ export class ExpensesTableComponent {
    */
   @Output() addExpensesAction = new EventEmitter<string>();
 
-  /**
-   * Emits a new value every time when user hits show details button
-   */
-  @Output() showDetailsAction = new EventEmitter<string>();
-
   constructor() { }
 
   trackByUserName(index: number, attender: Participator): string {
@@ -41,14 +36,6 @@ export class ExpensesTableComponent {
    */
   addExpenses(user: string) {
     this.addExpensesAction.emit(user);
-  }
-
-  /**
-   * Show details about user's expenses during the trip
-   * @param user User to show current expenses
-   */
-  showDetails(user: string) {
-    this.showDetailsAction.emit(user);
   }
 
 }

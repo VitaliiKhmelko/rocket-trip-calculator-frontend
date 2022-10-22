@@ -2,11 +2,11 @@
   <h1>{{ trip.name }}</h1>
   <p>{{ trip.description }} </p>
   <app-expenses-table [participators]="trip.participators" (addExpensesAction)="addExpenses($event)"
-    (showDetailsAction)="showDetails($event)"></app-expenses-table>
+  ></app-expenses-table>
 
   <div class="page-actions">
-    <button mat-raised-button color="warn" (click)="finishTrip(trip)">
-      FINISH THE TRIP
+    <button mat-raised-button color="primary" (click)="finishTrip(trip)">
+      Calculate
     </button>
   </div>
 </div>
