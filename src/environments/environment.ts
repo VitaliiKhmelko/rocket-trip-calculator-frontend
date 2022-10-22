@@ -2,11 +2,10 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { makeMirageJsServer } from "src/mirage-js-server/make-mirage-js-server.function";
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8282/api'
+  apiUrl: 'http://localhost:3600'
 };
 
 /*
@@ -18,4 +17,3 @@ export const environment = {
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
 
-makeMirageJsServer();

@@ -91,7 +91,7 @@ export class TripEffects {
           this.router.navigate(['create-trip'])
       }),
     )
-  }, { dispatch: false })
+  }, { dispatch: false });
 
   constructor(
     private actions$: Actions,
