@@ -16,11 +16,11 @@ export class TripHttpService {
 
   /**
    * Get trip that is in progress by attender's name
-   * @param uuid Trip uuid
+   * @param id Trip unique identifier
    * @returns trip in progress
    */
-  get$(uuid: string): Observable<Trip> {
-    return this.httpClient.get<Trip>(`${environment.apiUrl}/trips/${uuid}`);
+  get$(id: string): Observable<Trip> {
+    return this.httpClient.get<Trip>(`${environment.apiUrl}/trips/${id}`);
   }
 
   /**
@@ -30,5 +30,9 @@ export class TripHttpService {
    */
   put$(trip: Trip): Observable<string> {
     return this.httpClient.put<string>(`${environment.apiUrl}/trips`, trip);
+  }
+
+  patch$(id: string, trip: Partial<Trip>): Observable<Trip> {
+    return this.httpClient.patch<Trip>(`${environment.apiUrl}/trips/${id}`, trip);
   }
 }

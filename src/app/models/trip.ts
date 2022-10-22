@@ -7,6 +7,6 @@ export interface Trip {
   name: string,
   isFinished: boolean,
   description?: string,
-  uuid: string,
+  id: string,
   participators: Participator[],
 }

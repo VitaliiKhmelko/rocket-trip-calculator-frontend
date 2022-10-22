@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 import { Trip } from 'src/app/models/trip';
 import { TripCalculatorService } from 'src/app/services/trip-calculator.service';
 import { TripHttpService } from 'src/app/services/trip-http.service';
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 import { FinishTripDialogComponent } from 'src/app/view-trip/finish-trip-dialog/finish-trip-dialog.component';
 import { createTripComponentCreateButtonClicked } from '../actions/create-trip-component.actions.ts.actions';
 import { createTripFailure, createTripSuccess } from '../actions/create-trip.ts.actions';
-import { finishTrip, finishTripCanceled } from '../actions/finish-trip.actions';
+import { finishTrip, finishTripCanceled, finishTripFailure, finishTripSuccess } from '../actions/finish-trip.actions';
 import { loadTripsFailure, loadTripsSuccess } from '../actions/load-trip.actions';
 import { viewTripComponentFinishTripClicked, viewTripComponentInitialized } from '../actions/view-trip-component.actions';
 
@@ -35,7 +35,7 @@ export class TripEffects {
         const tripResult = this.tripCalculatorService.calculateBelongings(trip.participators)
         return this.dialog.open(FinishTripDialogComponent, { data: tripResult, width: '700px' }).afterClosed().pipe(
           map((result: string) => {
-            return result ? finishTrip() : finishTripCanceled()
+            return result ? finishTrip({ id: trip.id }) : finishTripCanceled()
           })
         )
       })
@@ -68,6 +68,30 @@ export class TripEffects {
       })
     )
   }, { dispatch: false });
+
+  finishTrip$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(finishTrip),
+      exhaustMap(({ id }) => {
+        return this.tripService.patch$(id, { isFinished: true }).pipe(
+          map(() => finishTripSuccess()),
+          catchError((error) => of(finishTripFailure({ error })))
+        )
+      })
+    )
+  });
+
+  finishTripSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(finishTripSuccess),
+      tap(() => {
+        this.userService.User = {
+          name: this.userService.User?.name!,
+        },
+          this.router.navigate(['create-trip'])
+      }),
+    )
+  }, { dispatch: false })
 
   constructor(
     private actions$: Actions,

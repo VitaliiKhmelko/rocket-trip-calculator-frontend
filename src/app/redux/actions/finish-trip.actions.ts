@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 
 export const finishTrip = createAction(
-  '[showTripExpensesDialog$ effect] Finish trip button clicked'
+  '[showTripExpensesDialog$ effect] Finish trip button clicked',
+  props<{ id: string }>()
 );
 
 export const finishTripCanceled = createAction(
@@ -10,7 +11,6 @@ export const finishTripCanceled = createAction(
 
 export const finishTripSuccess = createAction(
   '[finishTrip$ effect] finish trip success',
-  props<{ data: any }>()
 );
 
 export const finishTripFailure = createAction(
