@@ -25,8 +25,8 @@ export class ViewTripContainerComponent implements OnInit {
     }
   }
 
-  addExpenses(name: string): void {
-    this.store.dispatch(viewTripComponentAddExpensesClicked({ name }));
+  addExpenses(): void {
+    this.store.dispatch(viewTripComponentAddExpensesClicked({ payload: this.userService.User! }));
   }
 
   finishTrip(trip: Trip) {

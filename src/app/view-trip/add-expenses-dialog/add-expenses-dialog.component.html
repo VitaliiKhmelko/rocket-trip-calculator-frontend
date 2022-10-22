@@ -1,1 +1,22 @@
-<p>add-expenses-dialog works!</p>
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <h1 mat-dialog-title>
+    Add expenses
+  </h1>
+
+  <mat-dialog-content>
+    <p>Enter how much <strong>{{ data.name }}</strong> spent</p>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Expenses</mat-label>
+      <input matInput formControlName="expenses">
+      <mat-error>
+        value is invalid
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button>Add</button>
+  </mat-dialog-actions>
+  </form>

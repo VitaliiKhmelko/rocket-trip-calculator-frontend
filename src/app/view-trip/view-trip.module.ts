@@ -6,7 +6,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from '../shared/shared.module';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { EffectsModule } from '@ngrx/effects';
 import { ExpensesEffects } from '../redux/effects/expenses.effects';
 import { AddExpensesDialogComponent } from './add-expenses-dialog/add-expenses-dialog.component';
@@ -31,7 +34,12 @@ import { ViewTripRoutingModule } from './view-trip-routing.module';
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
+    MatInputModule,
     MatTooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
     EffectsModule.forFeature([ExpensesEffects]),
   ]
 })
