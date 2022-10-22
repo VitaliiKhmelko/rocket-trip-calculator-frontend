@@ -32,7 +32,7 @@ export class TripEffects {
     return this.actions$.pipe(
       ofType(viewTripComponentFinishTripClicked),
       exhaustMap(({ trip }) => {
-        const tripResult = this.tripCalculatorService.calculateBelongings(trip.participators)
+        const tripResult = this.tripCalculatorService.calculateBelongings(Object.values(trip.participators))
         return this.dialog.open(FinishTripDialogComponent, { data: tripResult, width: '700px' }).afterClosed().pipe(
           map((result: string) => {
             return result ? finishTrip({ id: trip.id }) : finishTripCanceled()

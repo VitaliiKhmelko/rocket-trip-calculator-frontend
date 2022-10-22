@@ -8,5 +8,5 @@ export interface Trip {
   isFinished: boolean,
   description?: string,
   id: string,
-  participators: Participator[],
+  participators: { [key: string]: Participator },
 }

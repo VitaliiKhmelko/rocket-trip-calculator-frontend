@@ -34,14 +34,18 @@ export class CreateTripContainerComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const trip = {
+      const trip: Partial<Trip> = {
         name: this.form.value.name!,
         description: this.form.value.description!,
-        participators: this.participators.map((control) => ({
-          name: control.value!,
-          expenses: []
-        })),
-      } as unknown as Trip;
+        participators: Object.fromEntries(this.participators.map((control) => {
+          const name = control.value!;
+          return [
+            name, {
+              name,
+              expenses: [],
+            }]
+        }))
+      };
 
       this.store.dispatch(createTripComponentCreateButtonClicked({ trip }))
     }

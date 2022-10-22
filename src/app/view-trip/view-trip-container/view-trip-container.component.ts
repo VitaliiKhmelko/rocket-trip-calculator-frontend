@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { filter, Observable, tap } from 'rxjs';
+import { Participator } from 'src/app/models/participator';
 import { Trip } from 'src/app/models/trip';
 import { viewTripComponentAddExpensesClicked, viewTripComponentFinishTripClicked, viewTripComponentInitialized } from 'src/app/redux/actions/view-trip-component.actions';
 import { selectTrip } from 'src/app/redux/selectors/trip.selectors';
@@ -13,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ViewTripContainerComponent implements OnInit {
   trip$: Observable<Trip | undefined> | undefined = undefined;
+  participators: Participator[] | undefined;
 
   constructor(private store: Store, private userService: UserService) { }
 
@@ -20,13 +22,18 @@ export class ViewTripContainerComponent implements OnInit {
     const tripId = this.userService.User?.tripId;
 
     if (tripId) {
-      this.trip$ = this.store.select(selectTrip);
+      this.trip$ = this.store.select(selectTrip).pipe(
+        filter((trip: Trip | undefined) => !!trip),
+        tap((trip: Trip | undefined) => {
+          this.participators = Object.values(trip!.participators);
+        })
+      );
       this.store.dispatch(viewTripComponentInitialized({ tripId }));
     }
   }
 
-  addExpenses(): void {
-    this.store.dispatch(viewTripComponentAddExpensesClicked({ payload: this.userService.User! }));
+  addExpenses(name: string, tripId: string): void {
+    this.store.dispatch(viewTripComponentAddExpensesClicked({ payload: { name, tripId } }));
   }
 
   finishTrip(trip: Trip) {
