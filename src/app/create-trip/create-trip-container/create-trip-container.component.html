@@ -5,7 +5,7 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Trip name</mat-label>
-        <input matInput [formControlName]="'name'">
+        <input matInput formControlName="name">
         <mat-error>This field is required</mat-error>
       </mat-form-field>
     </div>
@@ -13,12 +13,23 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
-        <input matInput [formControlName]="'description'">
+        <input matInput formControlName="description">
       </mat-form-field>
+    </div>
+    
+    <div formArrayName="participators">
+      <ng-container>
+        <mat-form-field appearance="fill" *ngFor="let lessonForm of participators; let i = index">
+          <mat-label>Participator</mat-label>
+          <input matInput [formControl]="participators[i]">
+        </mat-form-field>
+      </ng-container>
     </div>
 
   </mat-card-content>
   <mat-card-footer>
+    <button mat-raised-button color="primary" type="button" (click)="addParticipator()">Add participator</button>
+
     <button mat-raised-button color="primary" type="submit">Create a trip</button>
   </mat-card-footer>
   </form>

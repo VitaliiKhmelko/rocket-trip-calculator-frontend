@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Trip } from 'src/app/models/trip';
@@ -12,9 +12,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./create-trip-container.component.scss']
 })
 export class CreateTripContainerComponent implements OnInit {
+  participators = [new FormControl({ value: this.userService.User?.name, disabled: true }, [Validators.required])];
+
   form = this.formBuilder.group({
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('')
+    description: new FormControl(''),
+    participators: new FormArray(this.participators, [Validators.required])
   })
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private store: Store) { }
@@ -25,14 +28,20 @@ export class CreateTripContainerComponent implements OnInit {
     }
   }
 
+  addParticipator() {
+    this.participators.push(new FormControl('', [Validators.required]));
+  }
+
   onSubmit(): void {
     if (this.form.valid) {
-      const trip: Trip = this.form.value as Trip;
-
-      trip.participators = [{
-        name: 'Vitalii Khmelko',
-        expenses: []
-      }]
+      const trip = {
+        name: this.form.value.name!,
+        description: this.form.value.description!,
+        participators: this.participators.map((control) => ({
+          name: control.value!,
+          expenses: []
+        })),
+      } as unknown as Trip;
 
       this.store.dispatch(createTripComponentCreateButtonClicked({ trip }))
     }
