@@ -5,16 +5,12 @@ After the trip, each participator's expenses a tallied and money is exchanged.
 
 ## Development server
 
-Make sure you have NodeJS and docker installed. 
-See more [NodeJS]([https://nodejs.org/en/]) and [Docker](https://www.docker.com/)
+Make sure you have NodeJS, Angular CLI and docker installed. 
+See more [NodeJS]([https://nodejs.org/en/]) [Angular CLI](https://angular.io/cli) and [Docker](https://www.docker.com/)
 This application needs API to work with. You may use docker to setup local API.
-Run `docker-compose up` to setup two docker containers. One for API and another for MongoDB
-Once docker containers run you should run `ng serve` to start application on `http://localhost:4200/`
-in development mode.
-
-Always make sure frontend version matches backend version.
-You may find frontend version in `package.json` file.
-Check `docker-compose.yaml` file to find API version
+* Run `docker-compose up` to setup two docker containers. One for API and another for MongoDB
+* Run `npm install` to install dependencies
+* Run `ng serve` to start application on `http://localhost:4200/` in development mode.
 
 ## Build
 
