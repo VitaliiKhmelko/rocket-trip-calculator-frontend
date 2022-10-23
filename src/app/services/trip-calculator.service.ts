@@ -90,20 +90,22 @@ export class TripCalculatorService {
     const eachUserShouldSpend: number = round(totalSpends / actualSpends.length);
     const userBelongings: UserBelongings[] = [];
 
-    while (actualSpends.length > 1) {
-      const whoOwe = actualSpends[actualSpends.length - 1];
-      const whomOwe = actualSpends[0];
+    const participantSpends = actualSpends.filter((spends) => spends.amount !== eachUserShouldSpend)
+
+    while (participantSpends.length > 1) {
+      const whoOwe = participantSpends[participantSpends.length - 1];
+      const whomOwe = participantSpends[0];
       const whomExtraSpends = whomOwe.amount - eachUserShouldSpend;
       let oweAmount = 0;
 
       if (whomExtraSpends < (eachUserShouldSpend - whoOwe.amount)) {
         oweAmount = whomExtraSpends;
-        actualSpends.splice(0, 1);
-        actualSpends[actualSpends.length - 1].amount = whoOwe.amount + oweAmount
+        participantSpends.splice(0, 1);
+        participantSpends[participantSpends.length - 1].amount = whoOwe.amount + oweAmount
       } else {
         oweAmount = eachUserShouldSpend - whoOwe.amount;
-        actualSpends.splice(actualSpends.length - 1, 1);
-        actualSpends[0].amount = whomOwe.amount - oweAmount;
+        participantSpends.splice(participantSpends.length - 1, 1);
+        participantSpends[0].amount = whomOwe.amount - oweAmount;
       }
 
       userBelongings.push({

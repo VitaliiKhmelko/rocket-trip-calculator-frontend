@@ -65,5 +65,25 @@ describe('TripCalculatorService', () => {
       { who: 'Bao', whom: 'Camden', amount: 22.16 },
       { who: 'Adriana', whom: 'Camden', amount: 18.85 },
     ]);
+  });
+
+  it('should not include user if spending amount is equal average', () => {
+    const participators: Participator[] = [{
+      name: 'Adriana',
+      expenses: [{ cost: 6.00 }]
+    }, {
+      name: 'Bao',
+      expenses: [{ cost: 5.00 }]
+    }, {
+      name: 'Camden',
+      expenses: [{ cost: 4.00 }]
+    }]
+
+    const result = service.calculateBelongings(participators);
+
+    expect(result.total).toBe(15.00);
+    expect(result.belongings).toEqual([
+      { who: 'Camden', whom: 'Adriana', amount: 1 },
+    ]);
   })
 });
