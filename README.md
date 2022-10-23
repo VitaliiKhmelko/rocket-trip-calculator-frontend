@@ -1,6 +1,6 @@
 # Rocket Trip Calculator Frontend
 
-Angular application to allow users to track expenses during the trip.
+Angular application to allow users track their expenses during the trip.
 After the trip, each participator's expenses a tallied and money is exchanged.
 
 ## Development server
