@@ -1,14 +1,20 @@
-# RocketTripCalculatorFrontend
+# Rocket Trip Calculator Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.5.
+Angular application to allow users to track expenses during the trip.
+After the trip, each participator's expenses a tallied and money is exchanged.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Make sure you have NodeJS and docker installed. 
+See more [NodeJS]([https://nodejs.org/en/]) and [Docker](https://www.docker.com/)
+This application needs API to work with. You may use docker to setup local API.
+Run `docker-compose up` to setup two docker containers. One for API and another for MongoDB
+Once docker containers run you should run `ng serve` to start application on `http://localhost:4200/`
+in development mode.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Always make sure frontend version matches backend version.
+You may find frontend version in `package.json` file.
+Check `docker-compose.yaml` file to find API version
 
 ## Build
 
@@ -18,10 +24,3 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
