@@ -22,7 +22,7 @@ export class TripEffects {
       switchMap(({ tripId }) => {
         return this.tripService.get$(tripId).pipe(
           map((trip: Trip) => loadTripsSuccess({ data: trip })),
-          catchError((error) => of(loadTripsFailure(error)))
+          catchError((error) => of(loadTripsFailure({ error })))
         )
       })
     )

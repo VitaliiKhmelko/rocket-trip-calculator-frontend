@@ -34,7 +34,7 @@ export class ExpensesEffects {
       switchMap(({ payload }) => {
         return this.tripService.patchCost$(this.userService.User?.tripId!, { [payload.name]: payload }).pipe(
           map(() => saveExpensesSuccess({ participator: payload })),
-          catchError((error) => of(saveExpensesFailure(error)))
+          catchError((error) => of(saveExpensesFailure({ error })))
         )
       })
     )

@@ -37,7 +37,7 @@ export class TripHttpService {
     return this.httpClient.patch<Trip>(`${environment.apiUrl}/trips/${id}`, trip);
   }
 
-  patchCost$(id: string, payload: { [key: string]: Participator }) {
+  patchCost$(id: string, payload: { [key: string]: Participator }): Observable<string> {
     return this.httpClient.patch<string>(`${environment.apiUrl}/trips/${id}/participators`, payload)
   }
 }
