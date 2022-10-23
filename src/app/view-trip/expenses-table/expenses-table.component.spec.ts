@@ -33,11 +33,4 @@ describe('ExpensesTableComponent', () => {
     expect(spy).toHaveBeenCalledWith('Helga')
   });
 
-  it('should emit showDetailsAction on showDetails', () => {
-    const spy = spyOn(component.showDetailsAction, 'emit');
-
-    component.showDetails('Helga');
-
-    expect(spy).toHaveBeenCalledWith('Helga')
-  });
 });

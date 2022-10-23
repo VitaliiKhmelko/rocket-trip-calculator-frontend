@@ -1,5 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { Trip } from '../models/trip';
 
 import { TripHttpService } from './trip-http.service';
 
@@ -27,9 +28,45 @@ describe('TripService', () => {
 
     // Assert
     const testRequest = httpTestingController.expectOne(
-      `http://localhost:8282/api/trip?uuid=tripUuid`,
+      `http://localhost:3600/trips/tripUuid`,
     );
 
     expect(testRequest.request.method).toBe('GET');
+  });
+
+  it('should call the PATCH endpoint', (): void => {
+    // Act
+    service.patch$('tripUuid', {} as Trip).subscribe();
+
+    // Assert
+    const testRequest = httpTestingController.expectOne(
+      `http://localhost:3600/trips/tripUuid`,
+    );
+
+    expect(testRequest.request.method).toBe('PATCH');
+  });
+
+  it('should call the PUT endpoint', (): void => {
+    // Act
+    service.put$({ id: 'tripUuid' }).subscribe();
+
+    // Assert
+    const testRequest = httpTestingController.expectOne(
+      `http://localhost:3600/trips`,
+    );
+
+    expect(testRequest.request.method).toBe('PUT');
+  });
+
+  it('should call the PATCH costs endpoint', (): void => {
+    // Act
+    service.patchCost$('trip', { 'Eugene': { name: 'Eugene', expenses: [] } }).subscribe();
+
+    // Assert
+    const testRequest = httpTestingController.expectOne(
+      `http://localhost:3600/trips/trip/participators`,
+    );
+
+    expect(testRequest.request.method).toBe('PATCH');
   });
 });

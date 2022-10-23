@@ -27,7 +27,7 @@ describe('AuthenticationHttpService', () => {
 
     // Assert
     const testRequest = httpTestingController.expectOne(
-      `http://localhost:8282/api/login`,
+      `http://localhost:3600/login`,
     );
 
     expect(testRequest.request.method).toBe('POST');

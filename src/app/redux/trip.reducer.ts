@@ -22,7 +22,7 @@ export const tripReducer = createReducer(
   }),
   on(saveExpensesSuccess, (state, { participator }) => {
     if (state.trip) {
-      const currentParticipator: Participator | undefined = state.trip?.participators[participator.name];
+      const currentParticipator: Participator | undefined = state.trip.participators[participator.name];
 
       if (currentParticipator) {
         const trip: Trip = {
