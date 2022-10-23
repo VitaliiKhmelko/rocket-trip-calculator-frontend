@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SignInComponent implements OnInit {
   form = this.formBuilder.group({
-    name: new FormControl('', [Validators.required])
+    name: new FormControl('', [Validators.required, Validators.pattern(/^\w+$/)])
   });
 
   constructor(private formBuilder: FormBuilder, private store: Store, private userService: UserService, private router: Router) { }

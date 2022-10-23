@@ -17,7 +17,7 @@ export class CreateTripContainerComponent implements OnInit {
   form = this.formBuilder.group({
     name: new FormControl('', [Validators.required]),
     description: new FormControl(''),
-    participators: new FormArray(this.participators, [Validators.required])
+    participators: new FormArray(this.participators, [Validators.required, Validators.pattern(/^\w+$/)])
   })
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private store: Store) { }
